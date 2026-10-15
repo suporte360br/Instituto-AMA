@@ -158,7 +158,18 @@ a.cartao:hover { transform: translateY(-3px); box-shadow: 0 12px 28px rgba(60, 2
 .artigo h1 { font-size: clamp(1.9rem, 4.5vw, 2.7rem); margin: .4rem 0 1.2rem; }
 .artigo h2 { font-size: 1.5rem; margin: 2.2rem 0 .8rem; }
 .artigo h2::after { display: none; }
-.artigo .capa { border-radius: 12px; margin: 0 0 2rem; width: 100%; aspect-ratio: 3 / 2; object-fit: cover; }
+.artigo .capa { border-radius: 12px; margin: 0 0 2rem; width: 100%; height: auto; }
+.artigo .capa-pequena { width: auto; max-width: 320px; }
+.artigo h3 { font-size: 1.2rem; margin: 1.6rem 0 .5rem; }
+.infografico { margin: 2.5rem 0 0; }
+.infografico img { width: 100%; border-radius: 12px; border: 1px solid var(--borda); }
+.infografico figcaption { font-size: .85rem; color: var(--texto-suave); text-align: center; margin-top: .5rem; }
+.mais { margin: 2.5rem 0 0; }
+.filtros { display: flex; flex-wrap: wrap; gap: .5rem; justify-content: center; margin: 0 0 2.5rem; }
+.filtro { font: inherit; font-size: .9rem; padding: .45rem 1rem; border-radius: 999px; border: 1px solid var(--borda); background: #fff; color: var(--texto); cursor: pointer; }
+.filtro:hover { border-color: var(--rosa); color: var(--rosa); }
+.filtro.ativo { background: var(--rosa); border-color: var(--rosa); color: #fff; }
+.cartao[hidden] { display: none; }
 .artigo li { margin-bottom: .4rem; }
 .artigo .chamada { margin-top: 3rem; padding: 1.5rem; border-left: 4px solid var(--rosa); background: var(--fundo-alt); border-radius: 0 10px 10px 0; }
 .voltar { display: inline-block; margin-bottom: 1rem; text-decoration: none; font-weight: 700; font-size: .9rem; }

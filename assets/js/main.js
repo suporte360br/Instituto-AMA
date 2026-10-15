@@ -32,3 +32,15 @@ if (form) {
 
 const ano = document.getElementById('ano');
 if (ano) ano.textContent = new Date().getFullYear();
+
+// Filtro de temas no blog
+const filtros = document.querySelectorAll('.filtro');
+filtros.forEach((botao) => {
+  botao.addEventListener('click', () => {
+    filtros.forEach((b) => b.classList.toggle('ativo', b === botao));
+    const cat = botao.dataset.cat;
+    document.querySelectorAll('#materias .cartao').forEach((c) => {
+      c.hidden = cat !== '' && c.dataset.cat !== cat;
+    });
+  });
+});
