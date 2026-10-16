@@ -1,0 +1,135 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1536 1024" width="1536" height="1024" font-family="Roboto, Arial, sans-serif">
+  <defs>
+    <linearGradient id="ceu" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fdf3f8"/>
+      <stop offset=".55" stop-color="#f4f0fb"/>
+      <stop offset="1" stop-color="#e8f3fc"/>
+    </linearGradient>
+    <linearGradient id="solo" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2a2435"/>
+      <stop offset="1" stop-color="#1b1724"/>
+    </linearGradient>
+    <linearGradient id="raiz" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f4b860"/>
+      <stop offset="1" stop-color="#e3177b" stop-opacity=".25"/>
+    </linearGradient>
+    <linearGradient id="copa" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#7cc544"/>
+      <stop offset="1" stop-color="#3f8f2a"/>
+    </linearGradient>
+    <radialGradient id="brilho" cx=".5" cy=".5" r=".5">
+      <stop offset="0" stop-color="#fff" stop-opacity=".9"/>
+      <stop offset="1" stop-color="#fff" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="sombra" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#3c1428" flood-opacity=".18"/>
+    </filter>
+    <g id="pessoa">
+      <circle cx="0" cy="-26" r="13"/>
+      <path d="M-18 22 V2 a18 18 0 0 1 36 0 V22 z"/>
+    </g>
+  </defs>
+
+  <!-- Fundo -->
+  <rect width="1536" height="1024" fill="url(#ceu)"/>
+  <circle cx="768" cy="300" r="330" fill="url(#brilho)"/>
+  <!-- Constelação ao fundo -->
+  <g fill="#1b84e0" opacity=".35">
+    <circle cx="1240" cy="120" r="3"/><circle cx="1320" cy="190" r="2.5"/><circle cx="1400" cy="110" r="3.5"/>
+    <circle cx="1460" cy="230" r="2.5"/><circle cx="180" cy="140" r="3"/><circle cx="260" cy="90" r="2.5"/><circle cx="120" cy="230" r="2"/>
+  </g>
+  <path d="M1240 120 L1320 190 L1400 110 L1460 230 M180 140 L260 90 M180 140 L120 230" stroke="#1b84e0" stroke-opacity=".25" stroke-width="1.5" fill="none"/>
+
+  <!-- Solo -->
+  <path d="M0 640 C300 610 520 630 768 618 C1020 606 1240 628 1536 612 V1024 H0 z" fill="url(#solo)"/>
+
+  <!-- Raízes (ancestralidade) -->
+  <g fill="none" stroke="url(#raiz)" stroke-linecap="round">
+    <path d="M768 620 C760 700 700 760 600 800 C520 832 440 840 360 900" stroke-width="10"/>
+    <path d="M768 620 C780 710 850 770 940 806 C1030 842 1110 850 1180 910" stroke-width="10"/>
+    <path d="M768 620 C766 720 760 820 768 960" stroke-width="12"/>
+    <path d="M700 760 C660 820 600 880 560 960" stroke-width="6"/>
+    <path d="M840 760 C880 830 930 890 990 960" stroke-width="6"/>
+    <path d="M600 800 C560 760 480 750 420 760" stroke-width="5"/>
+    <path d="M940 806 C990 770 1060 760 1120 770" stroke-width="5"/>
+  </g>
+  <!-- Ancestrais (nós nas raízes) -->
+  <g filter="url(#sombra)">
+    <g transform="translate(360 900)"><circle r="34" fill="#fff"/><use href="#pessoa" fill="#b9b2c6" transform="scale(.75) translate(0 6)"/></g>
+    <g transform="translate(1180 910)"><circle r="34" fill="#fff"/><use href="#pessoa" fill="#b9b2c6" transform="scale(.75) translate(0 6)"/></g>
+    <g transform="translate(560 960)"><circle r="28" fill="#fff"/><use href="#pessoa" fill="#c9c3d4" transform="scale(.6) translate(0 6)"/></g>
+    <g transform="translate(990 960)"><circle r="28" fill="#fff"/><use href="#pessoa" fill="#c9c3d4" transform="scale(.6) translate(0 6)"/></g>
+    <g transform="translate(420 760)"><circle r="26" fill="#fff"/><use href="#pessoa" fill="#c9c3d4" transform="scale(.55) translate(0 6)"/></g>
+    <g transform="translate(1120 770)"><circle r="26" fill="#fff"/><use href="#pessoa" fill="#c9c3d4" transform="scale(.55) translate(0 6)"/></g>
+  </g>
+
+  <!-- Tronco -->
+  <path d="M742 620 C746 520 738 440 752 360 L784 360 C798 440 790 520 794 620 z" fill="#8a5a3c"/>
+  <path d="M760 430 C720 400 690 370 660 330 M776 420 C820 390 850 360 880 320" stroke="#8a5a3c" stroke-width="16" stroke-linecap="round" fill="none"/>
+
+  <!-- Copa -->
+  <g filter="url(#sombra)">
+    <circle cx="768" cy="250" r="190" fill="url(#copa)" opacity=".92"/>
+    <circle cx="620" cy="300" r="120" fill="#5aab2a" opacity=".85"/>
+    <circle cx="916" cy="300" r="120" fill="#4f9e28" opacity=".85"/>
+  </g>
+
+  <!-- Rede de vínculos na copa -->
+  <g stroke="#fff" stroke-opacity=".7" stroke-width="2.5" fill="none">
+    <path d="M768 150 L640 250 L700 360 L836 360 L896 250 z"/>
+    <path d="M768 150 L700 360 M768 150 L836 360 M640 250 L896 250"/>
+  </g>
+  <g>
+    <g transform="translate(768 150)"><circle r="30" fill="#fff"/><use href="#pessoa" fill="#e3177b" transform="scale(.62) translate(0 8)"/></g>
+    <g transform="translate(640 250)"><circle r="30" fill="#fff"/><use href="#pessoa" fill="#1b84e0" transform="scale(.62) translate(0 8)"/></g>
+    <g transform="translate(896 250)"><circle r="30" fill="#fff"/><use href="#pessoa" fill="#1b84e0" transform="scale(.62) translate(0 8)"/></g>
+    <g transform="translate(700 360)"><circle r="30" fill="#fff"/><use href="#pessoa" fill="#e3177b" transform="scale(.62) translate(0 8)"/></g>
+    <g transform="translate(836 360)"><circle r="30" fill="#fff"/><use href="#pessoa" fill="#5aab2a" transform="scale(.62) translate(0 8)"/></g>
+    <path d="M768 262 c-14 -16 -40 -4 -28 16 l28 26 l28 -26 c12 -20 -14 -32 -28 -16 z" fill="#fff"/>
+  </g>
+
+  <!-- Família de mãos dadas -->
+  <g transform="translate(768 586)">
+    <path d="M-212 -4 Q-170 8 -128 6 M128 6 Q170 8 212 -4" stroke="#2a2435" stroke-opacity=".55" stroke-width="4" stroke-linecap="round" fill="none"/>
+    <use href="#pessoa" fill="#e3177b" transform="translate(-212 0) scale(1.15)"/>
+    <use href="#pessoa" fill="#f29fc5" transform="translate(-128 10) scale(.8)"/>
+    <use href="#pessoa" fill="#7fbcf0" transform="translate(128 10) scale(.8)"/>
+    <use href="#pessoa" fill="#1b84e0" transform="translate(212 0) scale(1.15)"/>
+  </g>
+
+  <!-- Repetição de padrões (espiral) -->
+  <g transform="translate(1270 430)" fill="none" stroke="#1b84e0" stroke-width="5" stroke-linecap="round">
+    <path d="M0 0 m-90 0 a90 90 0 1 1 180 0 a70 70 0 1 1 -140 0 a50 50 0 1 1 100 0 a30 30 0 1 1 -60 0 a12 12 0 1 1 24 0"/>
+    <path d="M88 12 l14 -18 l10 22" stroke-linejoin="round"/>
+  </g>
+
+  <!-- Pertencimento (círculo de pessoas) -->
+  <g transform="translate(266 430)">
+    <circle r="96" fill="none" stroke="#e3177b" stroke-width="5" stroke-dasharray="2 14" stroke-linecap="round"/>
+    <use href="#pessoa" fill="#e3177b" transform="translate(0 -62) scale(.6)"/>
+    <use href="#pessoa" fill="#5aab2a" transform="translate(58 22) scale(.6)"/>
+    <use href="#pessoa" fill="#1b84e0" transform="translate(-58 22) scale(.6)"/>
+    <path d="M0 14 c-10 -12 -30 -3 -21 12 l21 20 l21 -20 c9 -15 -11 -24 -21 -12 z" fill="#e3177b"/>
+  </g>
+
+  <!-- Rótulos -->
+  <g font-weight="700" letter-spacing="6" font-size="30" text-anchor="middle">
+    <text x="266" y="580" fill="#e3177b">PERTENCIMENTO</text>
+    <text x="1270" y="580" fill="#1b84e0">REPETIÇÃO</text>
+    <text x="1270" y="618" fill="#1b84e0">DE PADRÕES</text>
+    <text x="768" y="1004" fill="#f4b860">ANCESTRALIDADE</text>
+    <text x="768" y="40" fill="#5aab2a" font-size="26">AMOR</text>
+  </g>
+  <path d="M768 58 l0 0" stroke="none"/>
+
+  <!-- Correntes que se rompem / broto (cura) -->
+  <g transform="translate(250 760)" fill="none" stroke="#b9b2c6" stroke-width="7">
+    <rect x="-70" y="-14" width="56" height="28" rx="14"/>
+    <rect x="-10" y="-14" width="56" height="28" rx="14" transform="rotate(-18 18 0)"/>
+  </g>
+  <g transform="translate(1290 770)">
+    <path d="M0 40 V0" stroke="#7cc544" stroke-width="6" stroke-linecap="round"/>
+    <path d="M0 8 C-30 0 -36 -26 -30 -34 C-8 -30 2 -12 0 8 z" fill="#7cc544"/>
+    <path d="M0 0 C26 -10 34 -34 28 -42 C6 -38 -2 -20 0 0 z" fill="#5aab2a"/>
+  </g>
+</svg>
