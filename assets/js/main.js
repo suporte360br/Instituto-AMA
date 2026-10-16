@@ -44,3 +44,45 @@ filtros.forEach((botao) => {
     });
   });
 });
+
+// Campanhas: selo de situação pela data e carrossel
+const hoje = new Date().toISOString().slice(0, 10);
+document.querySelectorAll('.campanha').forEach((c) => {
+  const selo = c.querySelector('.status');
+  if (!selo) return;
+  if (c.dataset.fim && hoje > c.dataset.fim) { selo.textContent = 'Encerrada'; selo.className = 'status encerrada'; }
+  else if (c.dataset.inicio && hoje < c.dataset.inicio) { selo.textContent = 'Em breve'; selo.className = 'status em-breve'; }
+  else { selo.textContent = 'Ativa'; selo.className = 'status'; }
+});
+
+document.querySelectorAll('.carrossel').forEach((car) => {
+  const trilho = car.querySelector('.carrossel-trilho');
+  const slides = [...trilho.children];
+  const pontos = car.querySelector('.carrossel-pontos');
+  const [antes, depois] = car.querySelectorAll('.carrossel-btn');
+  const atual = () => Math.round(trilho.scrollLeft / trilho.clientWidth);
+  const ir = (i) => trilho.scrollTo({ left: i * trilho.clientWidth });
+  slides.forEach((s, i) => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.setAttribute('role', 'tab');
+    b.setAttribute('aria-label', `Campanha ${i + 1} de ${slides.length}`);
+    b.addEventListener('click', () => ir(i));
+    pontos.appendChild(b);
+  });
+  const atualizar = () => {
+    const i = atual();
+    [...pontos.children].forEach((b, j) => b.setAttribute('aria-selected', i === j));
+    antes.disabled = i === 0;
+    depois.disabled = i >= slides.length - 1;
+  };
+  antes.addEventListener('click', () => ir(atual() - 1));
+  depois.addEventListener('click', () => ir(atual() + 1));
+  trilho.addEventListener('scroll', () => requestAnimationFrame(atualizar));
+  trilho.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight') ir(atual() + 1);
+    if (e.key === 'ArrowLeft') ir(atual() - 1);
+  });
+  if (slides.length < 2) car.querySelector('.carrossel-controles').hidden = true;
+  atualizar();
+});

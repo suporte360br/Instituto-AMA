@@ -198,3 +198,32 @@ a.cartao:hover { transform: translateY(-3px); box-shadow: 0 12px 28px rgba(60, 2
   .secao { padding: 48px 0; }
   .hero { padding: 40px 0; }
 }
+
+/* Campanhas (carrossel) */
+.carrossel { position: relative; }
+.carrossel-trilho { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; scrollbar-width: none; gap: 2rem; }
+.carrossel-trilho::-webkit-scrollbar { display: none; }
+.carrossel-trilho:focus-visible { outline: 2px solid var(--rosa); outline-offset: 4px; border-radius: 12px; }
+.campanha { flex: 0 0 100%; scroll-snap-align: center; display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); gap: 2.5rem; align-items: center; background: #fff; border: 1px solid var(--borda); border-radius: 16px; padding: 2rem; }
+.campanha-img img { width: 100%; height: auto; border-radius: 12px; box-shadow: 0 12px 28px rgba(60, 20, 40, .15); }
+.campanha-texto h2 { margin: .3rem 0 1rem; }
+.campanha-texto h3 { font-size: 1.1rem; margin: 1.4rem 0 .4rem; }
+.campanha-texto ul { margin: 0 0 1rem; padding-left: 1.2rem; }
+.campanha-texto li { margin-bottom: .3rem; }
+.campanha-prazo { margin: 0 0 1.5rem; }
+.status { display: inline-block; margin-right: .6rem; padding: .2rem .75rem; border-radius: 999px; font-size: .78rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; background: #e6f4dc; color: #2f6b12; }
+.status::before { content: "● "; }
+.status.encerrada { background: #eeeeee; color: #666; }
+.status.em-breve { background: #e3f0fc; color: #135ea8; }
+.carrossel-controles[hidden] { display: none; }
+.carrossel-controles { display: flex; align-items: center; justify-content: center; gap: 1rem; margin-top: 1.5rem; }
+.carrossel-btn { width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--borda); background: #fff; color: var(--rosa); font-size: 1.8rem; line-height: 1; cursor: pointer; }
+.carrossel-btn:hover:not(:disabled) { background: var(--rosa); color: #fff; }
+.carrossel-btn:disabled { opacity: .35; cursor: default; }
+.carrossel-pontos { display: flex; gap: .5rem; }
+.carrossel-pontos button { width: 11px; height: 11px; padding: 0; border-radius: 50%; border: 0; background: var(--borda); cursor: pointer; }
+.carrossel-pontos button[aria-selected="true"] { background: var(--rosa); }
+@media (max-width: 860px) {
+  .campanha { grid-template-columns: 1fr; padding: 1.25rem; gap: 1.5rem; }
+  .campanha-img img { max-width: 420px; margin: 0 auto; }
+}
