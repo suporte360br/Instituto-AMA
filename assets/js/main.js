@@ -1,3 +1,8 @@
+// Garante HTTPS no domínio oficial (se o navegador abrir uma cópia antiga em http)
+if (location.protocol === 'http:' && location.hostname.endsWith('institutoama.social.br')) {
+  location.replace('https://institutoama.social.br' + location.pathname + location.search + location.hash);
+}
+
 // Menu mobile
 const botaoMenu = document.querySelector('.menu-btn');
 const menu = document.getElementById('menu');
