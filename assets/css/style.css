@@ -209,7 +209,7 @@ a.cartao:hover { transform: translateY(-3px); box-shadow: 0 12px 28px rgba(60, 2
 .campanha-img img { width: auto; max-width: 100%; max-height: 620px; height: auto; border-radius: 12px; box-shadow: 0 12px 28px rgba(60, 20, 40, .15); }
 .campanha-texto h2 { margin: .3rem 0 1rem; }
 .campanha-texto h3 { font-size: 1.1rem; margin: 1.4rem 0 .4rem; }
-.campanha-texto ul { margin: 0 0 1rem; padding-left: 1.2rem; }
+.campanha-texto ul, .campanha-texto ol { margin: 0 0 1rem; padding-left: 1.2rem; }
 .campanha-texto li { margin-bottom: .3rem; }
 .campanha-prazo { margin: 0 0 1.5rem; }
 .status { display: inline-block; margin-right: .6rem; padding: .2rem .75rem; border-radius: 999px; font-size: .78rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; background: #e6f4dc; color: #2f6b12; }
