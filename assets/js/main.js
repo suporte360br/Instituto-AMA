@@ -60,8 +60,18 @@ document.querySelectorAll('.carrossel').forEach((car) => {
   const slides = [...trilho.children];
   const pontos = car.querySelector('.carrossel-pontos');
   const [antes, depois] = car.querySelectorAll('.carrossel-btn');
-  const atual = () => Math.round(trilho.scrollLeft / trilho.clientWidth);
-  const ir = (i) => trilho.scrollTo({ left: i * trilho.clientWidth });
+  const pos = (i) => slides[i].offsetLeft - slides[0].offsetLeft;
+  let idx = 0;
+  const atualizar = () => {
+    [...pontos.children].forEach((b, j) => b.setAttribute('aria-selected', idx === j));
+    antes.disabled = idx === 0;
+    depois.disabled = idx >= slides.length - 1;
+  };
+  const ir = (i) => {
+    idx = Math.max(0, Math.min(slides.length - 1, i));
+    trilho.scrollTo({ left: pos(idx) });
+    atualizar();
+  };
   slides.forEach((s, i) => {
     const b = document.createElement('button');
     b.type = 'button';
@@ -70,18 +80,20 @@ document.querySelectorAll('.carrossel').forEach((car) => {
     b.addEventListener('click', () => ir(i));
     pontos.appendChild(b);
   });
-  const atualizar = () => {
-    const i = atual();
-    [...pontos.children].forEach((b, j) => b.setAttribute('aria-selected', i === j));
-    antes.disabled = i === 0;
-    depois.disabled = i >= slides.length - 1;
-  };
-  antes.addEventListener('click', () => ir(atual() - 1));
-  depois.addEventListener('click', () => ir(atual() + 1));
-  trilho.addEventListener('scroll', () => requestAnimationFrame(atualizar));
+  antes.addEventListener('click', () => ir(idx - 1));
+  depois.addEventListener('click', () => ir(idx + 1));
+  // Arrastar com o dedo: descobre o slide mais próximo quando a rolagem para
+  let espera;
+  trilho.addEventListener('scroll', () => {
+    clearTimeout(espera);
+    espera = setTimeout(() => {
+      idx = slides.reduce((m, s, i) => (Math.abs(pos(i) - trilho.scrollLeft) < Math.abs(pos(m) - trilho.scrollLeft) ? i : m), 0);
+      atualizar();
+    }, 120);
+  });
   trilho.addEventListener('keydown', (e) => {
-    if (e.key === 'ArrowRight') ir(atual() + 1);
-    if (e.key === 'ArrowLeft') ir(atual() - 1);
+    if (e.key === 'ArrowRight') ir(idx + 1);
+    if (e.key === 'ArrowLeft') ir(idx - 1);
   });
   if (slides.length < 2) car.querySelector('.carrossel-controles').hidden = true;
   atualizar();

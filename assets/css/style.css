@@ -205,7 +205,8 @@ a.cartao:hover { transform: translateY(-3px); box-shadow: 0 12px 28px rgba(60, 2
 .carrossel-trilho::-webkit-scrollbar { display: none; }
 .carrossel-trilho:focus-visible { outline: 2px solid var(--rosa); outline-offset: 4px; border-radius: 12px; }
 .campanha { flex: 0 0 100%; scroll-snap-align: center; display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); gap: 2.5rem; align-items: center; background: #fff; border: 1px solid var(--borda); border-radius: 16px; padding: 2rem; }
-.campanha-img img { width: 100%; height: auto; border-radius: 12px; box-shadow: 0 12px 28px rgba(60, 20, 40, .15); }
+.campanha-img { display: flex; justify-content: center; }
+.campanha-img img { width: auto; max-width: 100%; max-height: 620px; height: auto; border-radius: 12px; box-shadow: 0 12px 28px rgba(60, 20, 40, .15); }
 .campanha-texto h2 { margin: .3rem 0 1rem; }
 .campanha-texto h3 { font-size: 1.1rem; margin: 1.4rem 0 .4rem; }
 .campanha-texto ul { margin: 0 0 1rem; padding-left: 1.2rem; }
