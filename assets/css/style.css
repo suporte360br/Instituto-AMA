@@ -164,6 +164,19 @@ a.cartao:hover { transform: translateY(-3px); box-shadow: 0 12px 28px rgba(60, 2
 .infografico { margin: 2.5rem 0 0; }
 .infografico img { width: 100%; border-radius: 12px; border: 1px solid var(--borda); }
 .infografico figcaption { font-size: .85rem; color: var(--texto-suave); text-align: center; margin-top: .5rem; }
+.capa-destaque { position: relative; margin: 0 0 2rem; border-radius: 16px; overflow: hidden; }
+.capa-destaque img { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
+.capa-destaque figcaption { position: absolute; inset: auto 0 0 0; padding: 4rem 1.8rem 1.6rem; background: linear-gradient(transparent, rgba(8, 40, 22, .85)); color: #fff; font-family: "Yeseva One", serif; font-size: clamp(1.15rem, 3vw, 1.7rem); line-height: 1.3; }
+.pilares { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin: 2rem 0; }
+.pilar { padding: 1.3rem 1.4rem; border: 1px solid var(--borda); border-radius: 14px; background: #fff; }
+.pilar svg { width: 40px; height: 40px; padding: 9px; border-radius: 50%; background: #e8f3ec; stroke: #1d6b3a; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.pilar h3 { margin: .7rem 0 .3rem; font-size: 1.05rem; }
+.pilar p { margin: 0; font-size: .95rem; color: var(--texto-suave); }
+.citacao { margin: 2.5rem 0; padding: 2rem 2rem 1.6rem; border-radius: 16px; background: #0f4d2a; color: #fff; }
+.citacao p { margin: 0; font-family: "Yeseva One", serif; font-size: clamp(1.1rem, 2.6vw, 1.4rem); line-height: 1.5; color: #fff; }
+.citacao p::before { content: "“"; display: block; font-size: 3rem; line-height: .6; color: #f5c518; }
+.citacao cite { display: block; margin-top: 1rem; font-style: normal; font-size: .85rem; color: #f5c518; letter-spacing: .04em; }
+@media (max-width: 560px) { .pilares { grid-template-columns: 1fr; } }
 .mais { margin: 2.5rem 0 0; }
 .filtros { display: flex; flex-wrap: wrap; gap: .5rem; justify-content: center; margin: 0 0 2.5rem; }
 .filtro { font: inherit; font-size: .9rem; padding: .45rem 1rem; border-radius: 999px; border: 1px solid var(--borda); background: #fff; color: var(--texto); cursor: pointer; }
