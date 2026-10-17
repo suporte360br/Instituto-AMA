@@ -241,3 +241,8 @@ a.cartao:hover { transform: translateY(-3px); box-shadow: 0 12px 28px rgba(60, 2
   .campanha { grid-template-columns: 1fr; padding: 1.25rem; gap: 1.5rem; }
   .campanha-img img { max-width: 420px; margin: 0 auto; }
 }
+
+/* Instagram: ponto do ícone na cor do traço; e-mail e Instagram juntos no Contato */
+.rodape-contato svg [stroke="none"] { fill: #ff7fbd; }
+.contato-email svg [stroke="none"] { fill: var(--rosa); }
+.contato-email + .contato-email { margin-top: -1.3rem; }
