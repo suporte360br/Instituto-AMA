@@ -248,17 +248,6 @@ a.cartao:hover { transform: translateY(-3px); box-shadow: 0 12px 28px rgba(60, 2
 .contato-email + .contato-email { margin-top: -1.3rem; }
 
 /* Livros espíritas */
-.livros { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.75rem; align-items: start; }
-.livros-grupo { background: #fff; border: 1px solid var(--borda); border-top: 4px solid var(--azul); border-radius: 12px; padding: 1.75rem 1.75rem 1.5rem; }
-.livros-grupo:nth-child(2) { border-top-color: var(--rosa); }
-.livros-grupo:nth-child(3) { border-top-color: var(--verde); }
-.livros-destaque { border-top-color: #f4b860 !important; }
-.livros-grupo h3 { margin: .35rem 0 .6rem; }
-.livros-grupo h4 { font-family: Roboto, sans-serif; font-size: .82rem; text-transform: uppercase; letter-spacing: .08em; color: var(--texto-suave); margin: 1.2rem 0 .4rem; }
-.livros-grupo > p { color: var(--texto-suave); margin: 0 0 .8rem; }
-.livros-grupo ol, .livros-grupo ul { margin: 0; padding-left: 1.3rem; }
-.livros-grupo li { margin-bottom: .45rem; }
-.livros-grupo li span { color: var(--texto-suave); font-size: .9rem; margin-left: .35rem; }
-.livros-grupo li small { display: block; color: var(--texto-suave); font-size: .88rem; line-height: 1.5; }
-.livros-nota { margin: 1rem 0 0 !important; font-size: .95rem; }
-@media (max-width: 860px) { .livros { grid-template-columns: 1fr; } }
+.livros-titulo { text-align: center; font-size: 1.6rem; margin: 3rem 0 .3rem; }
+.livros-titulo:first-of-type { margin-top: 1rem; }
+.livros-sub { text-align: center; color: var(--texto-suave); margin: 0 0 1.75rem; }
