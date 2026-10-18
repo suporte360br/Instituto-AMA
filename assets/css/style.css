@@ -251,3 +251,18 @@ a.cartao:hover { transform: translateY(-3px); box-shadow: 0 12px 28px rgba(60, 2
 .livros-titulo { text-align: center; font-size: 1.6rem; margin: 3rem 0 .3rem; }
 .livros-titulo:first-of-type { margin-top: 1rem; }
 .livros-sub { text-align: center; color: var(--texto-suave); margin: 0 0 1.75rem; }
+
+/* Referências: atalhos fixos, "Ver todos" e aviso de conferência */
+html { scroll-padding-top: 140px; }
+.atalhos { position: sticky; top: 72px; z-index: 4; background: rgba(255, 255, 255, .96); border-bottom: 1px solid var(--borda); backdrop-filter: blur(6px); }
+.atalhos .container { display: flex; gap: .5rem; justify-content: center; flex-wrap: wrap; padding: .7rem 0; }
+.atalhos a { font-size: .9rem; font-weight: 500; text-decoration: none; color: var(--escuro); padding: .45rem 1rem; border-radius: 999px; border: 1px solid var(--borda); background: #fff; white-space: nowrap; }
+.atalhos a:hover, .atalhos a.ativo { background: var(--rosa); border-color: var(--rosa); color: #fff; }
+.ver-todos { display: block; margin: 1.75rem auto 0; font: inherit; font-weight: 700; font-size: .9rem; text-transform: uppercase; letter-spacing: .05em; color: var(--rosa); background: #fff; border: 2px solid var(--rosa); border-radius: 999px; padding: .7rem 1.6rem; cursor: pointer; }
+.ver-todos:hover { background: var(--rosa); color: #fff; }
+.nota-conferido { text-align: center; font-size: .85rem; color: var(--texto-suave); margin: 1.5rem 0 0; }
+@media (max-width: 820px) {
+  .atalhos { top: 72px; }
+  .atalhos .container { flex-wrap: nowrap; justify-content: flex-start; overflow-x: auto; scrollbar-width: none; }
+  .atalhos .container::-webkit-scrollbar { display: none; }
+}

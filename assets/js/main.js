@@ -103,3 +103,32 @@ document.querySelectorAll('.carrossel').forEach((car) => {
   if (slides.length < 2) car.querySelector('.carrossel-controles').hidden = true;
   atualizar();
 });
+
+// Referências: mostra só os primeiros itens de cada bloco, com botão "Ver todos"
+document.querySelectorAll('.grade[data-limite]').forEach((grade) => {
+  const limite = Number(grade.dataset.limite);
+  const itens = [...grade.children];
+  if (itens.length <= limite) return;
+  const extras = itens.slice(limite);
+  const botao = document.createElement('button');
+  botao.type = 'button';
+  botao.className = 'ver-todos';
+  const fechar = () => { extras.forEach((i) => { i.hidden = true; }); botao.textContent = `Ver todos (${itens.length})`; botao.setAttribute('aria-expanded', 'false'); };
+  botao.addEventListener('click', () => {
+    if (botao.getAttribute('aria-expanded') === 'true') { fechar(); grade.scrollIntoView({ block: 'start' }); }
+    else { extras.forEach((i) => { i.hidden = false; }); botao.textContent = 'Ver menos'; botao.setAttribute('aria-expanded', 'true'); }
+  });
+  grade.after(botao);
+  fechar();
+});
+
+// Referências: destaca no menu de atalhos a seção que está na tela
+const atalhos = document.querySelectorAll('.atalhos a');
+if (atalhos.length && 'IntersectionObserver' in window) {
+  const obs = new IntersectionObserver((entradas) => {
+    entradas.forEach((e) => {
+      if (e.isIntersecting) atalhos.forEach((a) => a.classList.toggle('ativo', a.getAttribute('href') === '#' + e.target.id));
+    });
+  }, { rootMargin: '-45% 0px -50% 0px' });
+  atalhos.forEach((a) => { const s = document.querySelector(a.getAttribute('href')); if (s) obs.observe(s); });
+}
