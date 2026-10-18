@@ -317,6 +317,11 @@ html { scroll-padding-top: 140px; }
 .b-miniaturas button { position: absolute; top: 3px; right: 3px; width: 24px; height: 24px; border-radius: 50%; border: 0; background: rgba(0, 0, 0, .6); color: #fff; font-size: 1rem; line-height: 1; cursor: pointer; }
 .b-final { display: flex; flex-wrap: wrap; gap: .75rem; }
 .b-final .dica { flex-basis: 100%; margin: .25rem 0 0; }
+.b-qtd { display: flex; gap: 1rem; }
+.b-qtd label { flex: 1; }
+.b-qtd select { display: block; width: 100%; margin-top: .3rem; font: inherit; font-weight: 400; padding: .5rem .6rem; border-radius: 8px; border: 1px solid #d9c6d0; background: #fff; }
+.b-link { font: inherit; color: var(--rosa); background: none; border: 0; padding: 0; text-decoration: underline; cursor: pointer; }
+.b-link[hidden] { display: none; }
 .previa h2 { margin-top: 0; }
 @media (max-width: 960px) { .montador-grade { grid-template-columns: 1fr; } }
 
@@ -333,14 +338,16 @@ html { scroll-padding-top: 140px; }
 .capa-texto p { font-family: Georgia, serif; font-style: italic; font-size: 24px; color: #5d6170; margin: 0; }
 .capa-enfeite { flex: 1; display: flex; align-items: center; justify-content: center; font-size: 220px; color: #f4b860; opacity: .55; }
 .fotos { display: grid; gap: 12px; flex: 1; min-height: 0; height: 100%; }
-.fotos img { width: 100%; height: 100%; min-height: 0; object-fit: cover; border-radius: 10px; }
+.fotos .foto { position: relative; min-height: 0; overflow: hidden; border-radius: 10px; background: #f6eef2; }
+.fotos .foto-fundo { position: absolute; inset: -30px; width: calc(100% + 60px); height: calc(100% + 60px); object-fit: cover; filter: blur(22px) saturate(1.1); opacity: .6; }
+.fotos .foto-img { position: relative; display: block; width: 100%; height: 100%; object-fit: contain; }
 .fotos-1 { grid-template: 1fr / 1fr; }
 .fotos-2 { grid-template: 1fr 1fr / 1fr; }
 .fotos-3 { grid-template: 1.3fr 1fr / 1fr 1fr; }
-.fotos-3 img:first-child { grid-column: 1 / -1; }
+.fotos-3 .foto:first-child { grid-column: 1 / -1; }
 .fotos-4 { grid-template: 1fr 1fr / 1fr 1fr; }
 .fotos-5 { grid-template: 1.2fr 1fr 1fr / 1fr 1fr; }
-.fotos-5 img:first-child { grid-column: 1 / -1; }
+.fotos-5 .foto:first-child { grid-column: 1 / -1; }
 .b-oracao { font-family: Georgia, "Times New Roman", serif; font-size: 16.5px; line-height: 1.6; margin-bottom: 30px; }
 .b-oracao h2 { font-family: "Yeseva One", Georgia, serif; font-weight: 400; font-size: 28px; color: var(--rosa); margin: 0 0 6px; }
 .b-oracao h2::after { width: 48px; height: 3px; margin-top: 8px; }

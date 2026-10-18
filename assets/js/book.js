@@ -44,6 +44,9 @@
 
   function desenharMiniaturas() {
     miniaturas.innerHTML = '';
+    const n = fotos.length, ex = fotos.some((f) => f.exemplo);
+    $('b-fotos-info').textContent = n ? `${n} ${n === 1 ? 'foto' : 'fotos'}${ex ? ' de exemplo (serão trocadas pelas suas)' : ' no book'}` : 'Nenhuma foto escolhida.';
+    $('b-limpar').hidden = !n;
     fotos.forEach((f, i) => {
       const li = document.createElement('li');
       li.innerHTML = '<img alt=""><button type="button" aria-label="Remover foto">&times;</button>';
@@ -56,6 +59,8 @@
     });
   }
   $('b-fotos').addEventListener('change', (e) => {
+    // fotos do exemplo saem quando a pessoa escolhe as próprias
+    fotos = fotos.filter((f) => !f.exemplo);
     [...e.target.files].filter((a) => a.type.startsWith('image/')).forEach((a) => fotos.push({ src: URL.createObjectURL(a) }));
     e.target.value = '';
     desenharMiniaturas(); montar();
@@ -69,9 +74,13 @@
     $('b-sub').value = 'Família Exemplo';
     desenharLista(); desenharMiniaturas(); montar();
   }
+  $('b-limpar').addEventListener('click', () => {
+    fotos.filter((f) => !f.exemplo).forEach((f) => URL.revokeObjectURL(f.src));
+    fotos = []; desenharMiniaturas(); montar();
+  });
   $('b-exemplo').addEventListener('click', carregarExemplo);
-  ['b-titulo', 'b-sub', 'b-mensagens'].forEach((id) => $(id).addEventListener('input', montar));
-  $('b-mensagens').addEventListener('change', montar);
+  ['b-titulo', 'b-sub'].forEach((id) => $(id).addEventListener('input', montar));
+  ['b-mensagens', 'b-na-capa', 'b-por-pagina'].forEach((id) => $(id).addEventListener('change', montar));
 
   // ----- montagem das páginas -----
   const el = (tag, cls, html) => { const e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; return e; };
@@ -85,7 +94,13 @@
   }
   function grade(fs) {
     const g = el('div', `fotos fotos-${Math.min(fs.length, 5)}`);
-    fs.forEach((f) => { const img = el('img'); img.src = f.src; img.alt = ''; g.appendChild(img); });
+    // foto inteira (sem cortar), sobre um fundo desfocado da própria foto
+    fs.forEach((f) => {
+      const cel = el('div', 'foto');
+      const fundo = el('img', 'foto-fundo'); fundo.src = f.src; fundo.alt = '';
+      const img = el('img', 'foto-img'); img.src = f.src; img.alt = '';
+      cel.append(fundo, img); g.appendChild(cel);
+    });
     return g;
   }
   const transborda = (m) => m.scrollHeight > m.clientHeight + 1;
@@ -102,7 +117,7 @@
     cab.appendChild(el('h1')).textContent = titulo;
     if (sub) cab.appendChild(el('p')).textContent = sub;
     capa.miolo.appendChild(cab);
-    const naCapa = fotos.slice(0, Math.min(5, fotos.length));
+    const naCapa = fotos.slice(0, Number($('b-na-capa').value));
     if (naCapa.length) capa.miolo.appendChild(grade(naCapa));
     else capa.miolo.appendChild(el('div', 'capa-enfeite', '&#10047;'));
     book.appendChild(capa.folha); paginas.push(capa.folha);
@@ -142,9 +157,10 @@
     // fotos restantes em páginas de até 4, intercaladas entre as orações
     const resto = fotos.slice(naCapa.length);
     const paginasFoto = [];
-    for (let i = 0; i < resto.length; i += 4) {
+    const porPagina = Number($('b-por-pagina').value);
+    for (let i = 0; i < resto.length; i += porPagina) {
       const p = novaPagina('fotos');
-      p.miolo.appendChild(grade(resto.slice(i, i + 4)));
+      p.miolo.appendChild(grade(resto.slice(i, i + porPagina)));
       paginasFoto.push(p.folha);
     }
     const passo = (paginasOracao.length + 1) / (paginasFoto.length + 1);
@@ -170,6 +186,7 @@
 
     const total = book.children.length;
     $('b-contagem').textContent = `${total} páginas · ${escolhidas.length} ${escolhidas.length === 1 ? 'oração' : 'orações'} · ${fotos.length} ${fotos.length === 1 ? 'foto' : 'fotos'}`;
+    $('b-paginas-foto').textContent = fotos.length ? `${naCapa.length} na capa e ${resto.length} em ${paginasFoto.length} ${paginasFoto.length === 1 ? 'página' : 'páginas'} de fotos.` : '';
     escala();
   }
 
@@ -198,6 +215,7 @@
     Promise.all(imgs.map((i) => (i.complete ? 0 : new Promise((r) => { i.onload = i.onerror = r; })))).then(() => window.print());
   });
 
+  desenharMiniaturas();
   desenharLista();
   if (new URLSearchParams(location.search).has('exemplo')) carregarExemplo(); else montar();
 })();
