@@ -266,3 +266,8 @@ html { scroll-padding-top: 140px; }
   .atalhos .container { flex-wrap: nowrap; justify-content: flex-start; overflow-x: auto; scrollbar-width: none; }
   .atalhos .container::-webkit-scrollbar { display: none; }
 }
+
+/* Matéria de orações: texto das preces em destaque */
+.artigo blockquote.prece { margin: 1rem 0 1.5rem; padding: 1.25rem 1.5rem; background: #fffaf2; border-left: 4px solid #f4b860; border-radius: 0 12px 12px 0; font-family: Georgia, "Times New Roman", serif; font-size: 1.05rem; line-height: 1.75; color: var(--escuro); }
+.artigo blockquote.prece p { margin: 0 0 .8rem; }
+.artigo blockquote.prece p:last-child { margin-bottom: 0; }
