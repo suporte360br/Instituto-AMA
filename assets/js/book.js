@@ -80,7 +80,7 @@
   });
   $('b-exemplo').addEventListener('click', carregarExemplo);
   ['b-titulo', 'b-sub'].forEach((id) => $(id).addEventListener('input', montar));
-  ['b-mensagens', 'b-na-capa', 'b-por-pagina'].forEach((id) => $(id).addEventListener('change', montar));
+  ['b-mensagens', 'b-na-capa', 'b-por-pagina', 'b-encaixar'].forEach((id) => $(id).addEventListener('change', montar));
 
   // ----- montagem das páginas -----
   const el = (tag, cls, html) => { const e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; return e; };
@@ -122,28 +122,29 @@
     else capa.miolo.appendChild(el('div', 'capa-enfeite', '&#10047;'));
     book.appendChild(capa.folha); paginas.push(capa.folha);
 
-    // orações: preenche a página e passa para a próxima quando não couber (divide por parágrafo)
+    // orações: cada uma fica inteira numa página; só é dividida (por parágrafo) se for maior que uma página
     const escolhidas = ordem.filter((o) => o.marcada);
     const paginasOracao = [];
     let atual = null;
-    const abrir = () => { atual = novaPagina('oracao'); book.appendChild(atual.folha); paginasOracao.push(atual.folha); };
+    const abrir = () => { atual = novaPagina('oracao'); book.appendChild(atual.folha); paginasOracao.push(atual); };
     escolhidas.forEach((o) => {
       if (!atual) abrir();
       const bloco = el('section', 'b-oracao');
       bloco.appendChild(el('h2')).textContent = o.titulo;
       if (o.autoria) bloco.appendChild(el('p', 'b-autoria')).textContent = o.autoria;
-      atual.miolo.appendChild(bloco);
       const partes = [...el('div', null, o.html).children];
-      // título não fica sozinho no pé da página
-      bloco.appendChild(partes[0]);
-      if (transborda(atual.miolo) && atual.miolo.children.length > 1) {
-        bloco.remove(); abrir(); atual.miolo.appendChild(bloco);
-      }
+      bloco.append(...partes);
+      atual.miolo.appendChild(bloco);
+      if (!transborda(atual.miolo)) return;
+      // não coube no que sobrou: vai inteira para a próxima página
+      if (atual.miolo.children.length > 1) { bloco.remove(); abrir(); atual.miolo.appendChild(bloco); }
+      if (!transborda(atual.miolo)) return;
+      // maior que uma página inteira: divide por parágrafo
+      partes.forEach((p) => p.remove());
       let destino = bloco;
-      for (const p of partes.slice(1)) {
+      for (const p of partes) {
         destino.appendChild(p);
-        if (transborda(atual.miolo)) {
-          // não coube: o parágrafo abre a próxima página, num bloco de continuação
+        if (transborda(atual.miolo) && destino.children.length > 1) {
           p.remove();
           abrir();
           destino = el('section', 'b-oracao b-continua');
@@ -152,10 +153,26 @@
         }
       }
     });
-    paginas.push(...paginasOracao);
 
-    // fotos restantes em páginas de até 4, intercaladas entre as orações
-    const resto = fotos.slice(naCapa.length);
+    // espaço livre no pé das páginas de orações recebe fotos (sem cortar as preces)
+    let resto = fotos.slice(naCapa.length);
+    let encaixadas = 0;
+    if ($('b-encaixar').checked) {
+      paginasOracao.forEach((p) => {
+        if (!resto.length) return;
+        const ultimo = p.miolo.lastElementChild;
+        const livre = p.miolo.clientHeight - (ultimo ? ultimo.offsetTop + ultimo.offsetHeight : 0);
+        if (livre < 250) return;
+        const n = Math.min(resto.length, livre < 420 ? 2 : 1);
+        const g = grade(resto.slice(0, n));
+        g.classList.add('fotos-encaixe');
+        g.style.height = `${livre - 48}px`; // desconta a margem entre a prece e as fotos
+        p.miolo.appendChild(g);
+        resto = resto.slice(n); encaixadas += n;
+      });
+    }
+
+    // fotos restantes em páginas próprias, só entre uma oração e outra (nunca no meio de uma prece)
     const paginasFoto = [];
     const porPagina = Number($('b-por-pagina').value);
     for (let i = 0; i < resto.length; i += porPagina) {
@@ -163,10 +180,11 @@
       p.miolo.appendChild(grade(resto.slice(i, i + porPagina)));
       paginasFoto.push(p.folha);
     }
-    const passo = (paginasOracao.length + 1) / (paginasFoto.length + 1);
+    const inicios = paginasOracao.slice(1).filter((p) => !p.miolo.firstElementChild?.classList.contains('b-continua')).map((p) => p.folha);
+    const passo = (inicios.length + 1) / (paginasFoto.length + 1);
     paginasFoto.forEach((pf, i) => {
-      const alvo = paginasOracao[Math.round(passo * (i + 1))];
-      if (alvo) book.insertBefore(pf, alvo); else book.appendChild(pf);
+      const alvo = inicios[Math.round(passo * (i + 1)) - 1];
+      if (alvo && alvo.parentNode) book.insertBefore(pf, alvo); else book.appendChild(pf);
     });
 
     // mensagens e contracapa
@@ -186,7 +204,10 @@
 
     const total = book.children.length;
     $('b-contagem').textContent = `${total} páginas · ${escolhidas.length} ${escolhidas.length === 1 ? 'oração' : 'orações'} · ${fotos.length} ${fotos.length === 1 ? 'foto' : 'fotos'}`;
-    $('b-paginas-foto').textContent = fotos.length ? `${naCapa.length} na capa e ${resto.length} em ${paginasFoto.length} ${paginasFoto.length === 1 ? 'página' : 'páginas'} de fotos.` : '';
+    const partesFoto = [`${naCapa.length} na capa`];
+    if (encaixadas) partesFoto.push(`${encaixadas} nos espaços livres das orações`);
+    if (resto.length) partesFoto.push(`${resto.length} em ${paginasFoto.length} ${paginasFoto.length === 1 ? 'página' : 'páginas'} de fotos`);
+    $('b-paginas-foto').textContent = fotos.length ? partesFoto.join(', ').replace(/, ([^,]*)$/, ' e $1') + '.' : '';
     escala();
   }
 

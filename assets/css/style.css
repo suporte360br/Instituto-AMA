@@ -348,6 +348,8 @@ html { scroll-padding-top: 140px; }
 .fotos-4 { grid-template: 1fr 1fr / 1fr 1fr; }
 .fotos-5 { grid-template: 1.2fr 1fr 1fr / 1fr 1fr; }
 .fotos-5 .foto:first-child { grid-column: 1 / -1; }
+.fotos.fotos-encaixe { flex: none; grid-template: 1fr / repeat(auto-fit, minmax(0, 1fr)); margin-top: 24px; }
+.fotos.fotos-encaixe .foto:first-child { grid-column: auto; }
 .b-oracao { font-family: Georgia, "Times New Roman", serif; font-size: 16.5px; line-height: 1.6; margin-bottom: 30px; }
 .b-oracao h2 { font-family: "Yeseva One", Georgia, serif; font-weight: 400; font-size: 28px; color: var(--rosa); margin: 0 0 6px; }
 .b-oracao h2::after { width: 48px; height: 3px; margin-top: 8px; }
