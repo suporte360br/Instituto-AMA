@@ -56,6 +56,21 @@ img { max-width: 100%; height: auto; display: block; }
 .hero h1 span { color: var(--rosa); }
 .hero p { font-size: 1.15rem; color: var(--texto-suave); margin: 0 0 2rem; }
 .hero img { border-radius: 12px; box-shadow: 0 18px 40px rgba(60, 20, 40, .18); }
+/* Quadro do letreiro: moldura de madeira pendurada num prego */
+.quadro { position: relative; margin-top: 64px; padding: 18px; border-radius: 3px; transform: rotate(-.6deg);
+  background:
+    repeating-linear-gradient(92deg, rgba(255, 255, 255, .05) 0 2px, transparent 2px 7px, rgba(0, 0, 0, .07) 7px 9px, transparent 9px 15px),
+    linear-gradient(135deg, #8a5a2e 0%, #6b4220 35%, #7d4f28 55%, #4e2f15 100%);
+  box-shadow: inset 0 0 0 2px #3a210e, inset 3px 3px 5px rgba(255, 214, 170, .35), inset -4px -4px 8px rgba(0, 0, 0, .45),
+    4px 8px 10px rgba(50, 25, 10, .25), 18px 30px 40px rgba(50, 25, 10, .3); }
+.hero .quadro img { display: block; width: 100%; height: auto; border-radius: 0; border: 3px solid #2e1a0b; box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .2), 0 0 0 1px #a8743f; }
+/* fio do quadro até o prego */
+.quadro::before { content: ""; position: absolute; left: 22%; right: 22%; top: -50px; height: 52px; z-index: -1;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 52' preserveAspectRatio='none'%3E%3Cpath d='M0 52 L50 2 L100 52' fill='none' stroke='%235b4636' stroke-width='1.6' vector-effect='non-scaling-stroke'/%3E%3C/svg%3E") no-repeat center / 100% 100%; }
+.quadro-prego { position: absolute; left: 50%; top: -58px; width: 16px; height: 16px; margin-left: -8px; border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #fafafa 0 15%, #b9bec4 35%, #6d737a 75%, #3e4348 100%);
+  box-shadow: 2px 4px 5px rgba(0, 0, 0, .35); }
+@media (max-width: 860px) { .quadro { margin-top: 56px; padding: 12px; } }
 .hero-pagina { padding: 56px 0 40px; text-align: center; }
 .hero-pagina p { max-width: 62ch; margin: 0 auto; color: var(--texto-suave); font-size: 1.1rem; }
 .hero-pagina h1 { margin: 0 0 .8rem; font-size: clamp(2rem, 5vw, 3rem); }
