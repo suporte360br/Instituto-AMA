@@ -132,3 +132,5 @@ if (atalhos.length && 'IntersectionObserver' in window) {
   }, { rootMargin: '-45% 0px -50% 0px' });
   atalhos.forEach((a) => { const s = document.querySelector(a.getAttribute('href')); if (s) obs.observe(s); });
 }
+// ao clicar, o atalho escolhido já fica destacado
+atalhos.forEach((a) => a.addEventListener('click', () => atalhos.forEach((b) => b.classList.toggle('ativo', b === a))));
