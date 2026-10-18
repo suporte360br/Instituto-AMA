@@ -271,3 +271,98 @@ html { scroll-padding-top: 140px; }
 .artigo blockquote.prece { margin: 1rem 0 1.5rem; padding: 1.25rem 1.5rem; background: #fffaf2; border-left: 4px solid #f4b860; border-radius: 0 12px 12px 0; font-family: Georgia, "Times New Roman", serif; font-size: 1.05rem; line-height: 1.75; color: var(--escuro); }
 .artigo blockquote.prece p { margin: 0 0 .8rem; }
 .artigo blockquote.prece p:last-child { margin-bottom: 0; }
+
+/* Orações (Referências), página de cada oração e montador de book */
+.cartao-oracao { border-top: 4px solid #f4b860; background: #fffdf8; }
+.cartao-oracao h3 { margin: .35rem 0 .5rem; }
+.cartao-oracao p { font-family: Georgia, "Times New Roman", serif; font-style: italic; }
+.book-chamada { display: flex; gap: 2rem; align-items: center; justify-content: space-between; margin-top: 3rem; padding: 2rem 2.25rem; border-radius: 16px; background: linear-gradient(120deg, #fdf3f8, #fff7ec); border: 1px solid var(--borda); }
+.book-chamada h3 { font-size: 1.5rem; margin: 0 0 .4rem; }
+.book-chamada p { margin: 0; color: var(--texto-suave); max-width: 60ch; }
+.book-chamada-botoes { display: flex; gap: .75rem; flex-wrap: wrap; flex-shrink: 0; }
+.artigo .autoria { margin: -.6rem 0 1.4rem; color: var(--texto-suave); font-style: italic; }
+.artigo blockquote.prece h3 { font-family: "Yeseva One", Georgia, serif; font-size: 1.15rem; margin: 1.2rem 0 .5rem; }
+.artigo blockquote.prece h3:first-child { margin-top: 0; }
+.artigo blockquote.prece ul { margin: 0 0 .8rem; padding-left: 1.2rem; }
+.oracao-nav { display: flex; justify-content: space-between; gap: 1rem; margin-top: 2rem; font-weight: 700; font-size: .92rem; }
+.oracao-nav a { text-decoration: none; }
+.oracao-nav a:last-child { text-align: right; }
+@media (max-width: 860px) { .book-chamada { flex-direction: column; align-items: flex-start; padding: 1.5rem; } }
+
+.montador-grade { display: grid; grid-template-columns: minmax(0, 380px) minmax(0, 1fr); gap: 2.5rem; align-items: start; }
+.montador-form fieldset { border: 1px solid var(--borda); border-radius: 12px; padding: 1.1rem 1.25rem 1.25rem; margin: 0 0 1.25rem; background: #fff; }
+.montador-form legend { font-family: "Yeseva One", Georgia, serif; font-size: 1.2rem; color: var(--escuro); padding: 0 .4rem; }
+.montador-form label { display: block; font-weight: 500; font-size: .92rem; margin-bottom: .8rem; }
+.montador-form input[type="text"] { display: block; width: 100%; margin-top: .3rem; font: inherit; font-weight: 400; padding: .6rem .7rem; border-radius: 8px; border: 1px solid #d9c6d0; }
+.montador-form input[type="text"]:focus { outline: 2px solid var(--rosa); outline-offset: 1px; }
+.montador-form input[type="checkbox"] { width: 1.05rem; height: 1.05rem; accent-color: var(--rosa); vertical-align: -2px; }
+.dica { font-size: .85rem; color: var(--texto-suave); margin: 0 0 .8rem; }
+.b-acoes { display: flex; gap: .5rem; margin-bottom: .6rem; }
+.b-acoes button, .b-setas button { font: inherit; font-size: .82rem; border: 1px solid var(--borda); background: #fff; color: var(--rosa); border-radius: 999px; padding: .25rem .8rem; cursor: pointer; }
+.b-acoes button:hover, .b-setas button:hover:not(:disabled) { border-color: var(--rosa); }
+.b-lista { list-style: none; margin: 0 0 1rem; padding: 0; max-height: 380px; overflow-y: auto; border: 1px solid var(--borda); border-radius: 10px; }
+.b-lista li { display: flex; align-items: center; justify-content: space-between; gap: .5rem; padding: .45rem .6rem; border-bottom: 1px solid var(--borda); }
+.b-lista li:last-child { border-bottom: 0; }
+.b-lista label { margin: 0; font-weight: 400; cursor: pointer; }
+.b-setas { display: flex; gap: .25rem; flex-shrink: 0; }
+.b-setas button { padding: .1rem .5rem; }
+.b-setas button:disabled { opacity: .3; cursor: default; }
+.montador-form .b-check { font-weight: 400; margin: 0; }
+.b-arquivo { position: relative; overflow: hidden; display: inline-block; margin: 0 0 .8rem; cursor: pointer; }
+.b-arquivo input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+.b-arquivo:focus-within { outline: 2px solid var(--rosa); outline-offset: 2px; }
+.b-miniaturas { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: .5rem; }
+.b-miniaturas li { position: relative; aspect-ratio: 1; }
+.b-miniaturas img { width: 100%; height: 100%; object-fit: cover; border-radius: 8px; }
+.b-miniaturas button { position: absolute; top: 3px; right: 3px; width: 24px; height: 24px; border-radius: 50%; border: 0; background: rgba(0, 0, 0, .6); color: #fff; font-size: 1rem; line-height: 1; cursor: pointer; }
+.b-final { display: flex; flex-wrap: wrap; gap: .75rem; }
+.b-final .dica { flex-basis: 100%; margin: .25rem 0 0; }
+.previa h2 { margin-top: 0; }
+@media (max-width: 960px) { .montador-grade { grid-template-columns: 1fr; } }
+
+/* Páginas do book (A4 = 794 x 1123 px), reduzidas na prévia por --k */
+.book { --k: .6; }
+.folha { width: calc(794px * var(--k)); height: calc(1123px * var(--k)); margin: 0 auto 18px; box-shadow: 0 6px 22px rgba(60, 20, 40, .16); border-radius: 4px; overflow: hidden; }
+.pagina { position: relative; width: 794px; height: 1123px; transform: scale(var(--k)); transform-origin: 0 0; background: #fff; color: #2b2d33; overflow: hidden; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+.pagina .miolo { position: absolute; inset: 72px 78px; overflow: hidden; }
+.pagina::after { content: ""; position: absolute; left: 78px; right: 78px; bottom: 36px; height: 3px; border-radius: 2px; background: linear-gradient(90deg, var(--rosa) 0 33%, var(--verde) 33% 66%, var(--azul) 66%); opacity: .5; }
+.pagina-capa { background: linear-gradient(170deg, #fdf3f8 0%, #fff 55%, #fff7ec 100%); }
+.pagina-capa .miolo { display: flex; flex-direction: column; gap: 36px; }
+.capa-texto { text-align: center; }
+.capa-texto h1 { font-family: "Yeseva One", Georgia, serif; font-weight: 400; font-size: 58px; line-height: 1.1; color: var(--rosa); margin: 20px 0 12px; }
+.capa-texto p { font-family: Georgia, serif; font-style: italic; font-size: 24px; color: #5d6170; margin: 0; }
+.capa-enfeite { flex: 1; display: flex; align-items: center; justify-content: center; font-size: 220px; color: #f4b860; opacity: .55; }
+.fotos { display: grid; gap: 12px; flex: 1; min-height: 0; height: 100%; }
+.fotos img { width: 100%; height: 100%; min-height: 0; object-fit: cover; border-radius: 10px; }
+.fotos-1 { grid-template: 1fr / 1fr; }
+.fotos-2 { grid-template: 1fr 1fr / 1fr; }
+.fotos-3 { grid-template: 1.3fr 1fr / 1fr 1fr; }
+.fotos-3 img:first-child { grid-column: 1 / -1; }
+.fotos-4 { grid-template: 1fr 1fr / 1fr 1fr; }
+.fotos-5 { grid-template: 1.2fr 1fr 1fr / 1fr 1fr; }
+.fotos-5 img:first-child { grid-column: 1 / -1; }
+.b-oracao { font-family: Georgia, "Times New Roman", serif; font-size: 16.5px; line-height: 1.6; margin-bottom: 30px; }
+.b-oracao h2 { font-family: "Yeseva One", Georgia, serif; font-weight: 400; font-size: 28px; color: var(--rosa); margin: 0 0 6px; }
+.b-oracao h2::after { width: 48px; height: 3px; margin-top: 8px; }
+.b-oracao .b-autoria { font-size: 13.5px; font-style: italic; color: #5d6170; margin: 0 0 10px; }
+.b-oracao h3 { font-family: "Yeseva One", Georgia, serif; font-weight: 400; font-size: 19px; margin: 14px 0 6px; color: #22202a; }
+.b-oracao p { margin: 0 0 10px; }
+.b-oracao ul { margin: 0 0 10px; padding-left: 22px; }
+.b-oracao li { margin-bottom: 4px; }
+.pagina-mensagens .miolo { display: flex; flex-direction: column; justify-content: center; gap: 34px; }
+.b-mensagem { margin: 0; padding: 30px 36px; border-radius: 16px; background: #fdf3f8; border-left: 5px solid var(--rosa); }
+.b-mensagem:nth-child(2) { background: #eef6ff; border-color: var(--azul); }
+.b-mensagem:nth-child(3) { background: #f2f9ec; border-color: var(--verde); }
+.b-mensagem p { margin: 0; font-family: "Yeseva One", Georgia, serif; font-size: 22px; line-height: 1.45; color: #22202a; }
+.b-mensagem cite { display: block; margin-top: 10px; font-style: normal; font-size: 14px; color: #5d6170; }
+.pagina-fim .miolo { display: flex; align-items: center; justify-content: center; text-align: center; }
+.pagina-fim p { font-size: 17px; line-height: 1.7; color: #5d6170; }
+.pagina-fim strong { font-family: "Yeseva One", Georgia, serif; font-weight: 400; font-size: 30px; color: var(--rosa); }
+#impressao { display: none; }
+@media print {
+  @page { size: A4; margin: 0; }
+  body > *:not(#impressao) { display: none !important; }
+  #impressao { display: block; }
+  #impressao .pagina { transform: none; break-after: page; page-break-after: always; }
+  #impressao .pagina:last-child { break-after: auto; page-break-after: auto; }
+}

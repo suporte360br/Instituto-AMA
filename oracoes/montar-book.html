@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Monte seu book de preces - Instituto AMA</title>
+  <meta name="description" content="Escolha orações, junte fotos da família e gere um book de preces em PDF para imprimir ou presentear.">
+  <meta property="og:title" content="Monte seu book de preces - Instituto AMA">
+  <meta property="og:description" content="Escolha orações, junte fotos da família e gere um book de preces em PDF para imprimir ou presentear.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:url" content="https://institutoama.social.br/oracoes/montar-book.html">
+  <meta property="og:image" content="https://institutoama.social.br/assets/img/banner.jpg">
+  <link rel="canonical" href="https://institutoama.social.br/oracoes/montar-book.html">
+  <link rel="icon" type="image/png" href="../assets/img/logo-icone.png">
+  <link rel="apple-touch-icon" href="../assets/img/logo-icone-512.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Yeseva+One&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css?v=f6928b96">
+</head>
+<body>
+  <a class="skip" href="#conteudo">Pular para o conteúdo</a>
+
+  <header class="cabecalho">
+    <nav class="nav container">
+      <a href="../" class="marca"><img src="../assets/img/logo-icone.png" alt="" width="52" height="52"><span><small>Instituto</small><b>AMA</b></span></a>
+      <button class="menu-btn" aria-label="Abrir menu" aria-expanded="false" aria-controls="menu">&#9776;</button>
+      <ul class="menu" id="menu">
+        <li><a href="../">Início</a></li>
+        <li><a href="../sobre-nos/">Sobre nós</a></li>
+        <li><a href="../campanhas/">Campanhas</a></li>
+        <li><a href="../blog/">Blog</a></li>
+        <li><a href="../referencias/" aria-current="page">Referências</a></li>
+        <li><a href="../contato/">Contato</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="conteudo">
+    <section class="hero-pagina secao-alt sem-impressao">
+      <div class="container">
+        <span class="rotulo">Orações</span>
+        <h1>Monte o seu book de preces</h1>
+        <p>Escolha as orações, junte fotos de quem você ama e gere um livrinho em PDF para imprimir, guardar ou presentear.</p>
+      </div>
+    </section>
+
+    <section class="secao montador sem-impressao">
+      <div class="container montador-grade">
+        <form class="montador-form" id="montador" onsubmit="return false">
+          <fieldset>
+            <legend>1. Capa</legend>
+            <label>Título <input id="b-titulo" type="text" value="Book de Preces" maxlength="40"></label>
+            <label>Dedicatória ou nome da família <input id="b-sub" type="text" placeholder="Ex.: Família Souza" maxlength="60"></label>
+          </fieldset>
+          <fieldset>
+            <legend>2. Orações</legend>
+            <p class="dica">Marque as orações e use as setas para mudar a ordem.</p>
+            <div class="b-acoes"><button type="button" id="b-todas">Marcar todas</button><button type="button" id="b-nenhuma">Desmarcar todas</button></div>
+            <ol class="b-lista" id="b-lista"></ol>
+            <label class="b-check"><input type="checkbox" id="b-mensagens" checked> Incluir página de mensagens (caridade, autoconhecimento e perdão)</label>
+          </fieldset>
+          <fieldset>
+            <legend>3. Fotos</legend>
+            <p class="dica">Escolha quantas fotos quiser. Elas ficam só no seu aparelho: nada é enviado para a internet.</p>
+            <label class="botao botao-contorno b-arquivo">Escolher fotos <input id="b-fotos" type="file" accept="image/*" multiple></label>
+            <ul class="b-miniaturas" id="b-miniaturas"></ul>
+          </fieldset>
+          <div class="b-final">
+            <button type="button" class="botao" id="b-imprimir">Gerar PDF / imprimir</button>
+            <button type="button" class="botao botao-contorno" id="b-exemplo">Carregar exemplo</button>
+            <p class="dica">Na janela de impressão, escolha <strong>Salvar como PDF</strong>, papel A4 e margens "Nenhuma".</p>
+          </div>
+        </form>
+        <div class="previa">
+          <h2>Prévia</h2>
+          <p class="dica" id="b-contagem"></p>
+          <div class="book" id="book" aria-live="polite"></div>
+        </div>
+      </div>
+    </section>
+
+  <script src="../assets/js/oracoes-dados.js?v=e9b971e5"></script>
+  <script src="../assets/js/book.js?v=e9b971e5"></script>
+  </main>
+
+  <footer class="rodape">
+    <div class="container rodape-grade">
+      <div class="rodape-marca">
+        <a href="../" class="marca"><img src="../assets/img/logo-icone.png" alt="" width="52" height="52"><span><small>Instituto</small><b>AMA</b></span></a>
+        <p>Amor, Misericórdia e Ação. Educação e apoio social para fortalecer quem já faz o bem e criar novas iniciativas.</p>
+      </div>
+      <div>
+        <h3>Navegação</h3>
+        <ul class="rodape-links">
+          <li><a href="../">Início</a></li>
+          <li><a href="../sobre-nos/">Sobre nós</a></li>
+          <li><a href="../campanhas/">Campanhas</a></li>
+          <li><a href="../blog/">Blog</a></li>
+          <li><a href="../referencias/">Referências</a></li>
+          <li><a href="../contato/">Contato</a></li>
+          <li><a href="../privacidade.html">Privacidade</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Contato</h3>
+        <ul class="rodape-contato">
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg><a href="mailto:contato@institutoama.social.br">contato@institutoama.social.br</a></li>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg><a href="https://www.instagram.com/institutoamasocial/" target="_blank" rel="noopener">@institutoamasocial</a></li>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>São Paulo – SP</li>
+        </ul>
+      </div>
+    </div>
+    <div class="container rodape-base">
+      <p>&copy; <span id="ano">2026</span> Instituto AMA. Todos os direitos reservados.</p>
+      <p><a href="../privacidade.html">Política de Privacidade</a></p>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js?v=f6928b96"></script>
+</body>
+</html>
