@@ -177,7 +177,7 @@ a.cartao:hover { transform: translateY(-3px); box-shadow: 0 12px 28px rgba(60, 2
 .rodape .marca span, .rodape .marca small { color: #fff; }
 .rodape .marca b { color: #ff7fbd; }
 .rodape .marca img { background: #fff; border-radius: 50%; padding: 4px; }
-.rodape-grade { display: grid; grid-template-columns: 1.6fr 1fr 1fr; gap: 3rem; align-items: start; }
+.rodape-grade { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1.2fr; gap: 2.5rem; align-items: start; }
 .rodape-marca p { margin: 1.2rem 0 0; max-width: 40ch; opacity: .8; }
 .rodape-contato li { display: flex; align-items: center; gap: .65rem; margin-bottom: .8rem; }
 .rodape-contato svg { width: 18px; height: 18px; flex: none; fill: none; stroke: #ff7fbd; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
