@@ -54,17 +54,30 @@ async function aplicarFiltros() {
   if (palavras.length) {
     const lista = await carregarIndice();
     mapa = {};
-    lista.forEach((m) => { mapa[m.s] = semAcento(m.t + ' ' + m.c + ' ' + m.r) + ' ' + m.x; });
+    lista.forEach((m) => { mapa[m.s] = { topo: semAcento(m.t), meio: semAcento(m.c + ' ' + m.r), corpo: m.x }; });
   }
+  const grade = document.getElementById('materias');
+  if (grade && !grade.dataset.ordem) cartoes.forEach((c, i) => { c.dataset.ordem = i; grade.dataset.ordem = '1'; });
+  const conta = (txt, p) => txt.split(p).length - 1;
   let visiveis = 0;
   cartoes.forEach((c) => {
     const slug = (c.getAttribute('href') || '').replace(/.html$/, '');
     const okCat = catAtual === '' || c.dataset.cat === catAtual;
-    const texto = mapa ? (mapa[slug] || semAcento(c.textContent)) : '';
-    const okBusca = !mapa || palavras.every((p) => texto.includes(p));
+    let pontos = 0;
+    let okBusca = true;
+    if (mapa) {
+      const m = mapa[slug] || { topo: semAcento(c.textContent), meio: '', corpo: '' };
+      okBusca = palavras.every((p) => m.topo.includes(p) || m.meio.includes(p) || m.corpo.includes(p));
+      palavras.forEach((p) => { pontos += conta(m.topo, p) * 100 + conta(m.meio, p) * 30 + Math.min(conta(m.corpo, p), 20); });
+    }
+    c.dataset.pontos = pontos;
     c.hidden = !(okCat && okBusca);
     if (!c.hidden) visiveis++;
   });
+  if (grade) {
+    [...cartoes].sort((a, b) => (mapa ? b.dataset.pontos - a.dataset.pontos : 0) || a.dataset.ordem - b.dataset.ordem)
+      .forEach((c) => grade.appendChild(c));
+  }
   if (infoBusca) {
     infoBusca.textContent = palavras.length
       ? (visiveis ? `${visiveis} matéria${visiveis > 1 ? 's' : ''} encontrada${visiveis > 1 ? 's' : ''} para “${campoBusca.value.trim()}”.` : `Nenhuma matéria encontrada para “${campoBusca.value.trim()}”. Tente outra palavra.`)
