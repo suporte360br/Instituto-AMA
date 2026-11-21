@@ -38,17 +38,60 @@ if (form) {
 const ano = document.getElementById('ano');
 if (ano) ano.textContent = new Date().getFullYear();
 
-// Filtro de temas no blog
+// Blog: filtro de temas e busca (índice em blog/busca.json)
 const filtros = document.querySelectorAll('.filtro');
+const campoBusca = document.getElementById('busca-q');
+const infoBusca = document.getElementById('busca-info');
+let catAtual = '';
+let indice = null;
+const semAcento = (s) => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
+const carregarIndice = () => indice || (indice = fetch('busca.json').then((r) => r.json()).catch(() => []));
+async function aplicarFiltros() {
+  const cartoes = document.querySelectorAll('#materias .cartao');
+  const termo = campoBusca ? semAcento(campoBusca.value.trim()) : '';
+  const palavras = termo.split(/s+/).filter((p) => p.length > 1);
+  let mapa = null;
+  if (palavras.length) {
+    const lista = await carregarIndice();
+    mapa = {};
+    lista.forEach((m) => { mapa[m.s] = semAcento(m.t + ' ' + m.c + ' ' + m.r) + ' ' + m.x; });
+  }
+  let visiveis = 0;
+  cartoes.forEach((c) => {
+    const slug = (c.getAttribute('href') || '').replace(/.html$/, '');
+    const okCat = catAtual === '' || c.dataset.cat === catAtual;
+    const texto = mapa ? (mapa[slug] || semAcento(c.textContent)) : '';
+    const okBusca = !mapa || palavras.every((p) => texto.includes(p));
+    c.hidden = !(okCat && okBusca);
+    if (!c.hidden) visiveis++;
+  });
+  if (infoBusca) {
+    infoBusca.textContent = palavras.length
+      ? (visiveis ? `${visiveis} matéria${visiveis > 1 ? 's' : ''} encontrada${visiveis > 1 ? 's' : ''} para “${campoBusca.value.trim()}”.` : `Nenhuma matéria encontrada para “${campoBusca.value.trim()}”. Tente outra palavra.`)
+      : '';
+  }
+}
 filtros.forEach((botao) => {
   botao.addEventListener('click', () => {
     filtros.forEach((b) => b.classList.toggle('ativo', b === botao));
-    const cat = botao.dataset.cat;
-    document.querySelectorAll('#materias .cartao').forEach((c) => {
-      c.hidden = cat !== '' && c.dataset.cat !== cat;
-    });
+    catAtual = botao.dataset.cat;
+    aplicarFiltros();
   });
 });
+if (campoBusca) {
+  let espera;
+  campoBusca.addEventListener('focus', carregarIndice, { once: true });
+  campoBusca.addEventListener('input', () => { clearTimeout(espera); espera = setTimeout(aplicarFiltros, 200); });
+  campoBusca.form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const url = new URL(location.href);
+    if (campoBusca.value.trim()) url.searchParams.set('q', campoBusca.value.trim()); else url.searchParams.delete('q');
+    history.replaceState(null, '', url);
+    aplicarFiltros();
+  });
+  const q = new URLSearchParams(location.search).get('q');
+  if (q) { campoBusca.value = q; aplicarFiltros(); }
+}
 
 // Campanhas: selo de situação pela data e carrossel
 const hoje = new Date().toISOString().slice(0, 10);
