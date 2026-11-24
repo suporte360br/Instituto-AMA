@@ -1,0 +1,4 @@
+Contact: mailto:contato@institutoama.social.br
+Expires: 2027-11-01T00:00:00Z
+Preferred-Languages: pt, en
+Canonical: https://institutoama.social.br/.well-known/security.txt
