@@ -12,6 +12,8 @@
   const W = 794, H = 1123; // A4 a 96 dpi
 
   const $ = (id) => document.getElementById(id);
+  // o formulário só monta o book na tela: nunca envia nada
+  $('montador').addEventListener('submit', (e) => e.preventDefault());
   const lista = $('b-lista'), book = $('book'), miniaturas = $('b-miniaturas');
   if (!lista || !book) return;
 
