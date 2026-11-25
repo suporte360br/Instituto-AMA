@@ -190,3 +190,6 @@ if (atalhos.length && 'IntersectionObserver' in window) {
 }
 // ao clicar, o atalho escolhido já fica destacado
 atalhos.forEach((a) => a.addEventListener('click', () => atalhos.forEach((b) => b.classList.toggle('ativo', b === a))));
+
+// Orações: botão "Imprimir ou salvar em PDF"
+document.querySelectorAll('[data-imprimir]').forEach((b) => b.addEventListener('click', () => window.print()));

@@ -414,7 +414,7 @@ html { scroll-padding-top: 140px; }
 #impressao { display: none; }
 @media print {
   @page { size: A4; margin: 0; }
-  body > *:not(#impressao) { display: none !important; }
+  body:has(#impressao) > *:not(#impressao) { display: none !important; }
   #impressao { display: block; }
   #impressao .pagina { transform: none; break-after: page; page-break-after: always; }
   #impressao .pagina:last-child { break-after: auto; page-break-after: auto; }
@@ -428,3 +428,11 @@ html { scroll-padding-top: 140px; }
 .temas a { display: inline-block; padding: .5rem 1.1rem; border-radius: 999px; border: 1px solid var(--rosa); color: var(--rosa); text-decoration: none; font-weight: 500; }
 .temas a:hover { background: var(--rosa); color: #fff; }
 .grade + h2.centro { margin-top: 3.5rem; }
+
+/* orações: botão e versão para imprimir/PDF */
+.imprimir { text-align: center; margin: 1.5rem 0; }
+@media print {
+  body:not(:has(#impressao)) header, body:not(:has(#impressao)) footer, .oracao-nav, .chamada, .voltar, .imprimir, .faixa { display: none !important; }
+  .artigo { padding: 0; }
+  .prece { border: 0; box-shadow: none; font-size: 14pt; }
+}
