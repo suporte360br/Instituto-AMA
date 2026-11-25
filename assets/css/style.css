@@ -433,6 +433,6 @@ html { scroll-padding-top: 140px; }
 .imprimir { text-align: center; margin: 1.5rem 0; }
 @media print {
   body:not(:has(#impressao)) header, body:not(:has(#impressao)) footer, .oracao-nav, .chamada, .voltar, .imprimir, .faixa { display: none !important; }
-  .artigo { padding: 0; }
+  body:not(:has(#impressao)) .artigo { padding: 18mm 20mm; }
   .prece { border: 0; box-shadow: none; font-size: 14pt; }
 }
